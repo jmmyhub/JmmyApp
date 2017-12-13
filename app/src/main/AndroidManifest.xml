@@ -21,6 +21,11 @@
                 <action android:name="android.intent.action.NEXT" />
             </intent-filter>
         </activity>
+        <activity android:name=".activities.ThirdActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.THIRD" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
