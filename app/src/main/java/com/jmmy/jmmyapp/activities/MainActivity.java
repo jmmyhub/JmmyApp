@@ -22,7 +22,7 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private Button button;
-    private Context context = this;
+    private Context context;
     private ListView listView ;
     private AdapterList adapterList = null;
     private int[] imgId = new int[]{R.mipmap.ic_launcher,R.mipmap.ic_launcher1,
@@ -78,5 +78,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
 }
