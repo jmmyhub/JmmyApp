@@ -6,13 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
-import com.jmmy.jmmyapp.AdapterContent.AdapterList;
+import com.jmmy.jmmyapp.AdapterContent.AdapterListView;
 import com.jmmy.jmmyapp.R;
 
 import java.util.ArrayList;
@@ -24,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private Button button;
     private Context context = this;
     private ListView listView ;
-    private AdapterList adapterList = null;
+    private AdapterListView adapterListView = null;
     private int[] imgId = new int[]{R.mipmap.ic_launcher,R.mipmap.ic_launcher1,
             R.mipmap.ic_launcher2,R.mipmap.ic_launcher3,R.mipmap.ic_launcher4,R.mipmap.ic_launcher5,R.mipmap.ic_launcher,R.mipmap.ic_launcher1,
             R.mipmap.ic_launcher2,R.mipmap.ic_launcher3,R.mipmap.ic_launcher4,R.mipmap.ic_launcher5,R.mipmap.ic_launcher,R.mipmap.ic_launcher1,
@@ -44,9 +42,9 @@ public class MainActivity extends AppCompatActivity {
             map.put("imgId",imgId[i]);
             list.add(map);
         }
-        adapterList = new AdapterList(context,list);
+        adapterListView = new AdapterListView(context,list);
         initView();
-        listView.setAdapter(adapterList);
+        listView.setAdapter(adapterListView);
     }
 
     private void initView() {
