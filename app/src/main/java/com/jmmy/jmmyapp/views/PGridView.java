@@ -1,4 +1,4 @@
-package com.jmmy.jmmyapp.Views;
+package com.jmmy.jmmyapp.views;
 
 import android.content.Context;
 import android.view.MotionEvent;

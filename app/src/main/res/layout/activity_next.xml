@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:text="Button" />
 
-    <com.jmmy.jmmyapp.Views.BezierView
+    <com.jmmy.jmmyapp.views.BezierView
         android:id="@+id/bezierview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.jmmy.jmmyapp.AdapterContent.AdapterListView;
+import com.jmmy.jmmyapp.adaptercontent.AdapterListView;
 import com.jmmy.jmmyapp.R;
 
 import java.util.ArrayList;

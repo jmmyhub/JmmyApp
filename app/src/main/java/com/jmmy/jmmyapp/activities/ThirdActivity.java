@@ -8,8 +8,8 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.GridView;
 
-import com.jmmy.jmmyapp.AdapterContent.AdapterGridView;
-import com.jmmy.jmmyapp.AdapterContent.AdapterListView;
+import com.jmmy.jmmyapp.adaptercontent.AdapterGridView;
+import com.jmmy.jmmyapp.adaptercontent.AdapterListView;
 import com.jmmy.jmmyapp.R;
 
 import java.util.ArrayList;
@@ -46,6 +46,11 @@ public class ThirdActivity extends Activity {
         }
         adapterGridView = new AdapterGridView(mContext,list);
         gridView.setAdapter(adapterGridView);
+    }
+
+    @Override
+    public boolean onGenericMotionEvent(MotionEvent event) {
+        return super.onGenericMotionEvent(event);
     }
 
     @Override
