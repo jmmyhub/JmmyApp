@@ -18,11 +18,11 @@ import java.util.Map;
  * Created by jmmy on 2017/12/14.
  */
 
-public class AdapterGridView extends BaseAdapter {
+public class GridViewAdapter extends BaseAdapter {
     private Context mContext = null;
     private List<Map<String,Object>> mapList = new ArrayList<>();
 
-    public AdapterGridView(Context mContext, List<Map<String, Object>> mapList) {
+    public GridViewAdapter(Context mContext, List<Map<String, Object>> mapList) {
         this.mContext = mContext;
         this.mapList = mapList;
     }

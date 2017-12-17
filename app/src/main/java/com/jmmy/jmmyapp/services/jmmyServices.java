@@ -15,4 +15,9 @@ public class jmmyServices extends Service {
     public IBinder onBind(Intent intent) {
         return null;
     }
+
+    @Override
+    public void onStart(Intent intent, int startId) {
+        super.onStart(intent, startId);
+    }
 }

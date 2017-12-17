@@ -16,11 +16,11 @@ import java.util.Map;
  * Created by jmmy on 2017/12/10.
  */
 
-public class AdapterListView extends BaseAdapter {
+public class ListViewAdapter extends BaseAdapter {
     private Context mContext = null;
     private List<Map<String,Object>> mapList = new ArrayList<>();
 
-    public AdapterListView(Context context, List<Map<String,Object>> list) {
+    public ListViewAdapter(Context context, List<Map<String,Object>> list) {
         this.mContext = context;
         this.mapList = list;
     }

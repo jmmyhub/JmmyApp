@@ -8,8 +8,8 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.GridView;
 
-import com.jmmy.jmmyapp.adaptercontent.AdapterGridView;
-import com.jmmy.jmmyapp.adaptercontent.AdapterListView;
+import com.jmmy.jmmyapp.adaptercontent.GridViewAdapter;
+import com.jmmy.jmmyapp.adaptercontent.ListViewAdapter;
 import com.jmmy.jmmyapp.R;
 
 import java.util.ArrayList;
@@ -24,13 +24,13 @@ import java.util.Map;
 public class ThirdActivity extends Activity {
     private Context mContext = this;
     private GridView gridView ;
-    private AdapterGridView adapterGridView;
+    private GridViewAdapter gridViewAdapter;
     private int[] imgId = new int[]{R.mipmap.ic_launcher,R.mipmap.ic_launcher1,
             R.mipmap.ic_launcher2,R.mipmap.ic_launcher3,R.mipmap.ic_launcher4,R.mipmap.ic_launcher5,R.mipmap.ic_launcher,R.mipmap.ic_launcher1,
             R.mipmap.ic_launcher2,R.mipmap.ic_launcher3,R.mipmap.ic_launcher4,R.mipmap.ic_launcher5,R.mipmap.ic_launcher,R.mipmap.ic_launcher1,
             R.mipmap.ic_launcher2,R.mipmap.ic_launcher3,R.mipmap.ic_launcher4,R.mipmap.ic_launcher5,R.mipmap.ic_launcher,R.mipmap.ic_launcher1,
             R.mipmap.ic_launcher2,R.mipmap.ic_launcher3,R.mipmap.ic_launcher4,R.mipmap.ic_launcher5};
-    private AdapterListView adapterListView;
+    private ListViewAdapter listViewAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,8 +44,8 @@ public class ThirdActivity extends Activity {
             map.put("imgId",imgId[i]);
             list.add(map);
         }
-        adapterGridView = new AdapterGridView(mContext,list);
-        gridView.setAdapter(adapterGridView);
+        gridViewAdapter = new GridViewAdapter(mContext,list);
+        gridView.setAdapter(gridViewAdapter);
     }
 
     @Override

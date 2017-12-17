@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.jmmy.jmmyapp.adaptercontent.AdapterListView;
+import com.jmmy.jmmyapp.adaptercontent.ListViewAdapter;
 import com.jmmy.jmmyapp.R;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private Button button;
     private Context context = this;
     private ListView listView ;
-    private AdapterListView adapterListView = null;
+    private ListViewAdapter listViewAdapter = null;
     private int[] imgId = new int[]{R.mipmap.ic_launcher,R.mipmap.ic_launcher1,
             R.mipmap.ic_launcher2,R.mipmap.ic_launcher3,R.mipmap.ic_launcher4,R.mipmap.ic_launcher5,R.mipmap.ic_launcher,R.mipmap.ic_launcher1,
             R.mipmap.ic_launcher2,R.mipmap.ic_launcher3,R.mipmap.ic_launcher4,R.mipmap.ic_launcher5,R.mipmap.ic_launcher,R.mipmap.ic_launcher1,
@@ -42,9 +42,9 @@ public class MainActivity extends AppCompatActivity {
             map.put("imgId",imgId[i]);
             list.add(map);
         }
-        adapterListView = new AdapterListView(context,list);
+        listViewAdapter = new ListViewAdapter(context,list);
         initView();
-        listView.setAdapter(adapterListView);
+        listView.setAdapter(listViewAdapter);
     }
 
     private void initView() {
