@@ -4,8 +4,6 @@ import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 /**
  * Created by jmmy on 2017/12/15.
@@ -18,31 +16,28 @@ public class jmmyProvider extends ContentProvider {
         return false;
     }
 
-    @Nullable
     @Override
-    public Uri insert(@NonNull Uri uri, @Nullable ContentValues contentValues) {
+    public Uri insert( Uri uri, ContentValues contentValues) {
         return null;
     }
 
     @Override
-    public int delete(@NonNull Uri uri, @Nullable String s, @Nullable String[] strings) {
+    public int delete( Uri uri, String s,  String[] strings) {
         return 0;
     }
 
-    @Nullable
     @Override
-    public Cursor query(@NonNull Uri uri, @Nullable String[] strings, @Nullable String s, @Nullable String[] strings1, @Nullable String s1) {
-        return null;
-    }
-
-    @Nullable
-    @Override
-    public String getType(@NonNull Uri uri) {
+    public Cursor query(Uri uri, String[] strings, String s,  String[] strings1, String s1) {
         return null;
     }
 
     @Override
-    public int update(@NonNull Uri uri, @Nullable ContentValues contentValues, @Nullable String s, @Nullable String[] strings) {
+    public String getType( Uri uri) {
+        return null;
+    }
+
+    @Override
+    public int update(Uri uri,  ContentValues contentValues, String s,  String[] strings) {
         return 0;
     }
 }

@@ -8,8 +8,7 @@
         android:id="@+id/imageview_third"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        app:srcCompat="@mipmap/ic_launcher_round" />
+        android:layout_gravity="center" />
 
     <TextView
         android:id="@+id/textview_third"

@@ -6,7 +6,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -25,7 +24,7 @@ public class BezierView extends View {
 
     private boolean isInc;//控制点左移，还是右移；
 
-    public BezierView(Context context, @Nullable AttributeSet attrs) {
+    public BezierView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
