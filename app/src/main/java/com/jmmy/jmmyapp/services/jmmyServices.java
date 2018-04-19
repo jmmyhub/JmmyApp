@@ -15,10 +15,14 @@ public class jmmyServices extends Service {
         return null;
     }
 
+
     @Override
-    public void onStart(Intent intent, int startId) {
-        Log.i("wjm","jmmyService onStart" );
-        super.onStart(intent, startId);
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        return super.onStartCommand(intent, flags, startId);
     }
 
+    @Override
+    public void onCreate() {
+        super.onCreate();
+    }
 }
