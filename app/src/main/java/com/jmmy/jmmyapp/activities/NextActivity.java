@@ -9,15 +9,18 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.jmmy.jmmyapp.R;
+import com.jmmy.jmmyapp.Utils.LogUtils;
 
 /**
  * Created by jmmy on 2017/12/10.
  */
 
 public class NextActivity extends Activity {
+    private String TAG = "NextActiviyty";
     private Button button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.i(TAG,"onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_next);
         Intent intent = getIntent();
@@ -33,7 +36,7 @@ public class NextActivity extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
-        Log.i("wjm","onStart");
+        LogUtils.i(TAG,"onStart");
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,31 +49,31 @@ public class NextActivity extends Activity {
     @Override
     protected void onStop() {
         super.onStop();
-        Log.i("wjm","onStop");
+        LogUtils.i(TAG,"onStop");
 
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        Log.i("wjm","onPause");
+        LogUtils.i(TAG,"onPause");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.i("wjm","onDestroy");
+        LogUtils.i(TAG,"onDestroy");
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.i("wjm","onRestart");
+        LogUtils.i(TAG,"onRestart");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.i("wjm","onResume");
+        LogUtils.i(TAG,"onResume");
     }
 }

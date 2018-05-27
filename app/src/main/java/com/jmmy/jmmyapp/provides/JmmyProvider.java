@@ -9,7 +9,7 @@ import android.net.Uri;
  * Created by jmmy on 2017/12/15.
  */
 
-public class jmmyProvider extends ContentProvider {
+public class JmmyProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {

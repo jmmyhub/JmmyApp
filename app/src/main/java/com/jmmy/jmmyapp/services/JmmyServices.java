@@ -9,7 +9,7 @@ import android.util.Log;
  * Created by jmmy on 2017/12/15.
  */
 
-public class jmmyServices extends Service {
+public class JmmyServices extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         return null;

@@ -5,7 +5,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.database.ContentObservable;
 import android.database.ContentObserver;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,9 +16,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.jmmy.jmmyapp.Utils.LogUtils;
 import com.jmmy.jmmyapp.adaptercontent.ListViewAdapter;
 import com.jmmy.jmmyapp.R;
-import com.jmmy.jmmyapp.broadcastrecevices.JmmyBroadcastReceiver;
+import com.jmmy.jmmyapp.broadcastreceviver.JmmyBroadcastReceiver;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends Activity {
+    private static String TAG = "MainActivity";
     private Button button;
     private Context context = this;
     private ListView listView ;
@@ -45,6 +46,7 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        LogUtils.i(TAG,"MainActivity  onCreate" );
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -117,9 +119,16 @@ public class MainActivity extends Activity {
     }
 
     @Override
-    protected void onResume() {
-        Log.i("wjm","MainActivity  onResume" );
-        //new Thread(runnable).start();
+    protected void onStart() {
+        LogUtils.i(TAG,"MainActivity  onStart" );
+        super.onStart();
+    }
+
+    @Override
+    protected void onResume()
+    {
+        LogUtils.i(TAG,"MainActivity  onResume" );
+        new Thread(runnable).start();
         super.onResume();
     }
 
@@ -127,23 +136,36 @@ public class MainActivity extends Activity {
         String readLine = " ";
         String html = "";
         try{
-            URL newUrl = new URL("https://www.oschina.net/");
+            URL newUrl = new URL("https://www.baidu.com");
             URLConnection connection = newUrl.openConnection();
             DataInputStream dataInputStream = new DataInputStream(connection.getInputStream());
             BufferedReader in = new BufferedReader(new InputStreamReader(dataInputStream,"UTF-8"));
             while ((readLine = in.readLine()) != null){
                 html = html + readLine;
-                Log.d("wjm","MainActivity : " + readLine);
+                LogUtils.i(TAG,"MainActivity : " + readLine);
             }
             in.close();
         }catch (Exception e){
-            Log.d("wjm","MainActivity : " + e.toString());
+            LogUtils.i(TAG,"MainActivity : " + e.toString());
         }
         return html;
     }
 
     @Override
+    protected void onPause() {
+        LogUtils.i(TAG,"MainActivity  onPause" );
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        LogUtils.i(TAG,"MainActivity  onStop" );
+        super.onStop();
+    }
+
+    @Override
     protected void onDestroy() {
+        LogUtils.i(TAG,"MainActivity  onDestory" );
         if (broadcastReceiver != null) {
             unregisterReceiver(broadcastReceiver);
             contentResolver.unregisterContentObserver(settingObserver);
@@ -154,15 +176,10 @@ public class MainActivity extends Activity {
     static Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
-            int what = msg.what;
-            /*switch (what){
-                case MSG1:*/
-                    Bundle bundle = msg.getData();
-                    String a = bundle.getString("jmmy","you");
-                    Log.i("wjm","handle message " + a);
-                    //break;
-            }
-        //}
+            Bundle bundle = msg.getData();
+            String a = bundle.getString("jmmy","you");
+            LogUtils.i(TAG,"handle message " + a);
+        }
     };
 
     Runnable runnable = new Runnable() {
