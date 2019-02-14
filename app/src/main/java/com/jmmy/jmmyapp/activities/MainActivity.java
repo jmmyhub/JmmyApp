@@ -49,6 +49,8 @@ public class MainActivity extends Activity {
         LogUtils.i(TAG,"MainActivity  onCreate" );
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        System.out.print(getStringFromNative());
+        System.out.print(getString_From_C());
 
         List<Map<String,Object>> list= new ArrayList<Map<String,Object>>();
         for (int i = 0; i < 14 ; i++) {
@@ -73,6 +75,15 @@ public class MainActivity extends Activity {
         contentResolver.registerContentObserver(Settings.Global.getUriFor(Settings.Global.DEVELOPMENT_SETTINGS_ENABLED),
                 false,settingObserver);
     }
+
+    static {
+        System.loadLibrary("MyJNI");
+    }
+
+    public native String getStringFromNative();
+
+    public native String getString_From_C();
+
     class SettingObserver extends ContentObserver{
 
         /**
