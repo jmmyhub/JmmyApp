@@ -35,32 +35,32 @@ public class MainActivity extends Activity {
     private static String TAG = "MainActivity";
     private Button button;
     private Context context = this;
-    private ListView listView ;
+    private ListView listView;
     private ListViewAdapter listViewAdapter = null;
-    private JmmyBroadcastReceiver broadcastReceiver ;
+    private JmmyBroadcastReceiver broadcastReceiver;
     private final static String IntentAction = "com.jmmy.app.broadcastrecevices";
 
     ContentResolver contentResolver;
-    SettingObserver settingObserver =new SettingObserver(new Handler());
+    SettingObserver settingObserver = new SettingObserver(new Handler());
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        LogUtils.i(TAG,"MainActivity  onCreate" );
+        LogUtils.i(TAG, "MainActivity  onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         System.out.print(getStringFromNative());
         System.out.print(getString_From_C());
 
-        List<Map<String,Object>> list= new ArrayList<Map<String,Object>>();
-        for (int i = 0; i < 14 ; i++) {
-            Map<String,Object> map = new HashMap<>();
-            map.put("username","mayan"+i);
-            map.put("email","146398439140"+i);
-            map.put("imgId",R.mipmap.ic_launcher);
+        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        for (int i = 0; i < 14; i++) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("username", "mayan" + i);
+            map.put("email", "146398439140" + i);
+            map.put("imgId", R.mipmap.ic_launcher);
             list.add(map);
         }
-        listViewAdapter = new ListViewAdapter(context,list);
+        listViewAdapter = new ListViewAdapter(context, list);
         initView();
         listView.setAdapter(listViewAdapter);
         //getSumId();
@@ -68,12 +68,12 @@ public class MainActivity extends Activity {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(IntentAction);
         broadcastReceiver = JmmyBroadcastReceiver.getInstance();
-        registerReceiver(broadcastReceiver ,intentFilter);
+        registerReceiver(broadcastReceiver, intentFilter);
         sendBroadcast(new Intent(IntentAction));
 
         contentResolver = getApplicationContext().getContentResolver();
         contentResolver.registerContentObserver(Settings.Global.getUriFor(Settings.Global.DEVELOPMENT_SETTINGS_ENABLED),
-                false,settingObserver);
+                false, settingObserver);
     }
 
     static {
@@ -84,7 +84,7 @@ public class MainActivity extends Activity {
 
     public native String getString_From_C();
 
-    class SettingObserver extends ContentObserver{
+    class SettingObserver extends ContentObserver {
 
         /**
          * Creates a content observer.
@@ -97,29 +97,30 @@ public class MainActivity extends Activity {
 
         @Override
         public void onChange(boolean selfChange) {
-            Log.i("jmmy",".........................");
+            Log.i("jmmy", ".........................");
             try {
-                Settings.Global.getInt(contentResolver,Settings.Global.MODE_RINGER);
+                Settings.Global.getInt(contentResolver, Settings.Global.MODE_RINGER);
             } catch (Settings.SettingNotFoundException e) {
                 e.printStackTrace();
             }
             super.onChange(selfChange);
         }
     }
+
     private void initView() {
         button = findViewById(R.id.button);
         listView = findViewById(R.id.listView_main);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                switch (view.getId()){
+                switch (view.getId()) {
                     case R.id.button:
-                        Log.i("wjm","nihao button");
-                        Toast.makeText(context,"show list.....",Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(MainActivity.this,NextActivity.class);
+                        Log.i("wjm", "nihao button");
+                        Toast.makeText(context, "show list.....", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(MainActivity.this, NextActivity.class);
                         Bundle bundle = new Bundle();
-                        bundle.putString("userName","mayan");
-                        bundle.putInt("age",26);
+                        bundle.putString("userName", "mayan");
+                        bundle.putInt("age", 26);
                         intent.putExtras(bundle);
                         startActivity(intent);
                         break;
@@ -131,65 +132,65 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onStart() {
-        LogUtils.i(TAG,"MainActivity  onStart" );
+        LogUtils.i(TAG, "MainActivity  onStart");
         super.onStart();
     }
 
     @Override
-    protected void onResume()
-    {
-        LogUtils.i(TAG,"MainActivity  onResume" );
+    protected void onResume() {
+        LogUtils.i(TAG, "MainActivity  onResume");
         new Thread(runnable).start();
         super.onResume();
     }
 
-    private String getSumId (){
+    private String getSumId() {
         String readLine = " ";
         String html = "";
-        try{
+        try {
             URL newUrl = new URL("https://www.baidu.com");
             URLConnection connection = newUrl.openConnection();
             DataInputStream dataInputStream = new DataInputStream(connection.getInputStream());
-            BufferedReader in = new BufferedReader(new InputStreamReader(dataInputStream,"UTF-8"));
-            while ((readLine = in.readLine()) != null){
+            BufferedReader in = new BufferedReader(new InputStreamReader(dataInputStream, "UTF-8"));
+            while ((readLine = in.readLine()) != null) {
                 html = html + readLine;
-                LogUtils.i(TAG,"MainActivity : " + readLine);
+                LogUtils.i(TAG, "MainActivity : " + readLine);
             }
             in.close();
-        }catch (Exception e){
-            LogUtils.i(TAG,"MainActivity : " + e.toString());
+        } catch (Exception e) {
+            LogUtils.i(TAG, "MainActivity : " + e.toString());
         }
         return html;
     }
 
     @Override
     protected void onPause() {
-        LogUtils.i(TAG,"MainActivity  onPause" );
+        LogUtils.i(TAG, "MainActivity  onPause");
         super.onPause();
     }
 
     @Override
     protected void onStop() {
-        LogUtils.i(TAG,"MainActivity  onStop" );
+        LogUtils.i(TAG, "MainActivity  onStop");
         super.onStop();
     }
 
     @Override
     protected void onDestroy() {
-        LogUtils.i(TAG,"MainActivity  onDestory" );
+        LogUtils.i(TAG, "MainActivity  onDestory");
         if (broadcastReceiver != null) {
             unregisterReceiver(broadcastReceiver);
             contentResolver.unregisterContentObserver(settingObserver);
         }
         super.onDestroy();
     }
+
     private final static int MSG1 = 0;
-    static Handler handler = new Handler(){
+    static Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             Bundle bundle = msg.getData();
-            String a = bundle.getString("jmmy","you");
-            LogUtils.i(TAG,"handle message " + a);
+            String a = bundle.getString("jmmy", "you");
+            LogUtils.i(TAG, "handle message " + a);
         }
     };
 
@@ -198,7 +199,7 @@ public class MainActivity extends Activity {
         public void run() {
             Message message = new Message();
             Bundle bundle = new Bundle();
-            bundle.putString("jmmy","nihao"+getSumId());
+            bundle.putString("jmmy", "nihao" + getSumId());
             message.setData(bundle);
             handler.sendMessage(message);
         }
