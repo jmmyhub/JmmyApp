@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.jmmy.jmmyapp.Utils.JmmyUtils;
 import com.jmmy.jmmyapp.Utils.LogUtils;
 import com.jmmy.jmmyapp.adaptercontent.ListViewAdapter;
 import com.jmmy.jmmyapp.R;
@@ -140,9 +141,16 @@ public class MainActivity extends Activity {
     protected void onResume() {
         LogUtils.i(TAG, "MainActivity  onResume");
         new Thread(runnable).start();
+        new MyThread().start();
         super.onResume();
     }
-
+    private class MyThread extends Thread{
+        @Override
+        public void run() {
+            JmmyUtils.getSocket();
+            super.run();
+        }
+    }
     private String getSumId() {
         String readLine = " ";
         String html = "";

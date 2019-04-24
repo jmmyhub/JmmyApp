@@ -1,6 +1,9 @@
 package com.jmmy.jmmyapp.activities;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.jmmy.jmmyapp.R;
+import com.jmmy.jmmyapp.Utils.JmmyUtils;
 import com.jmmy.jmmyapp.Utils.LogUtils;
 
 /**
@@ -31,6 +35,7 @@ public class NextActivity extends Activity {
         TextView textView = findViewById(R.id.next_textView1);
         textView.setText(name+":"+age);
         button = findViewById(R.id.button2);
+        JmmyUtils.getSocket();
     }
 
     @Override

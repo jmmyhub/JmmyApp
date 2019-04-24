@@ -3,6 +3,7 @@ package com.jmmy.jmmyapp.jmmyview;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+import android.os.storage.StorageManager;
 import android.view.View;
 
 public class JmmyView extends View {
