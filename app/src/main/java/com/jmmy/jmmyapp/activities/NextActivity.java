@@ -24,31 +24,15 @@ public class NextActivity extends Activity {
     private Button button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.i(TAG,"onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_next);
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
-        String name = bundle.getString("userName");
-        int age = bundle.getInt("age");
-        this.setTitle(name+":"+age);
-        TextView textView = findViewById(R.id.next_textView1);
-        textView.setText(name+":"+age);
-        button = findViewById(R.id.button2);
-        JmmyUtils.getSocket();
+        Log.i(TAG,"onCreate");
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         LogUtils.i(TAG,"onStart");
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(NextActivity.this,ThirdActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     @Override
