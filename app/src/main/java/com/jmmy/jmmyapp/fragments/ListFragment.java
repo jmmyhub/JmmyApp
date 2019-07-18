@@ -2,7 +2,6 @@ package com.jmmy.jmmyapp.fragments;
 
 import android.animation.Animator;
 import android.app.Fragment;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -32,10 +31,5 @@ public class ListFragment extends Fragment {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         return super.onContextItemSelected(item);
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
     }
 }
