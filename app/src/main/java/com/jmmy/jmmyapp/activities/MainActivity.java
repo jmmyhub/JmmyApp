@@ -1,24 +1,24 @@
 package com.jmmy.jmmyapp.activities;
 
 import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.ContentResolver;
 import android.content.IntentFilter;
 import android.database.ContentObserver;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
+import android.view.FrameMetrics;
 import android.widget.Button;
 
 import com.jmmy.jmmyapp.Utils.LogUtils;
 import com.jmmy.jmmyapp.R;
 import com.jmmy.jmmyapp.broadcastreceviver.JmmyBroadcastReceiver;
+import com.jmmy.jmmyapp.fragments.BaseFragment;
 
 public class MainActivity extends Activity {
     private static String TAG = "MainActivity";
-    private Button button1;
-    private Button button2;
-    private Button button3;
-    private Button button4;
     private JmmyBroadcastReceiver broadcastReceiver;
     private final static String IntentAction = "com.jmmy.app.broadcastrecevices";
 
@@ -42,6 +42,8 @@ public class MainActivity extends Activity {
         contentResolver = getApplicationContext().getContentResolver();
         contentResolver.registerContentObserver(Settings.Global.getUriFor(Settings.Global.DEVELOPMENT_SETTINGS_ENABLED),
                 false, settingObserver);
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
 
     }
 
@@ -100,9 +102,5 @@ public class MainActivity extends Activity {
     }
 
     private void initView() {
-        button1 = findViewById(R.id.button1);
-        button2 = findViewById(R.id.button2);
-        button3 = findViewById(R.id.button3);
-        button4 = findViewById(R.id.button4);
     }
 }
