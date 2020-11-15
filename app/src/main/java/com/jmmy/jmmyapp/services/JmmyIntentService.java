@@ -7,6 +7,7 @@ public class JmmyIntentService extends IntentService {
 
     private boolean isRunning = false;
     private int count = 0;
+
     //private LocalBrocastManager localBrocastManager;
     /**
      * Creates an IntentService.  Invoked by your subclass's constructor.

@@ -27,6 +27,11 @@
                 <action android:name="android.intent.action.THIRD" />
             </intent-filter>
         </activity>
+        <service android:name=".services.JmmyServices">
+            <intent-filter>
+
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

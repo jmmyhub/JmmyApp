@@ -8,10 +8,12 @@ import android.content.IntentFilter;
 import android.database.ContentObserver;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.RemoteException;
 import android.provider.Settings;
 import android.view.FrameMetrics;
 import android.widget.Button;
 
+import com.jmmy.jmmyapp.IMyAidlInterface;
 import com.jmmy.jmmyapp.Utils.LogUtils;
 import com.jmmy.jmmyapp.R;
 import com.jmmy.jmmyapp.broadcastreceviver.JmmyBroadcastReceiver;
@@ -25,6 +27,13 @@ public class MainActivity extends Activity {
     ContentResolver contentResolver;
     SettingObserver settingObserver = new SettingObserver(new Handler());
 
+    private class MyAidlLisenter extends IMyAidlInterface.Stub{
+
+        @Override
+        public void basicTypes(int anInt, long aLong, boolean aBoolean, float aFloat, double aDouble, String aString) throws RemoteException {
+
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +65,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onResume() {
         LogUtils.i(TAG, "MainActivity  onResume");
+
         super.onResume();
     }
 

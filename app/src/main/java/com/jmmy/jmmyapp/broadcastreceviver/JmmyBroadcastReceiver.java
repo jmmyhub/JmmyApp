@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
 import com.jmmy.jmmyapp.Utils.LogUtils;
 
 /**
@@ -29,4 +31,5 @@ public class JmmyBroadcastReceiver extends BroadcastReceiver {
             LogUtils.i(TAG,"onReceive  weijianming ............");
         }
     }
+
 }
