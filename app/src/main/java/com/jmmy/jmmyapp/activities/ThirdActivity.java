@@ -1,16 +1,14 @@
 package com.jmmy.jmmyapp.activities;
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.GridView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.jmmy.jmmyapp.Utils.LogUtils;
 import com.jmmy.jmmyapp.adaptercontent.GridViewAdapter;
-import com.jmmy.jmmyapp.adaptercontent.ListViewAdapter;
 import com.jmmy.jmmyapp.R;
 
 import java.util.ArrayList;
@@ -22,7 +20,7 @@ import java.util.Map;
  * Created by jmmy on 2017/12/13.
  */
 
-public class ThirdActivity extends Activity {
+public class ThirdActivity extends AppCompatActivity {
     private Context mContext = this;
     private String TAG = "ThirdActivity";
     private GridView gridView ;
