@@ -30,6 +30,10 @@
                 <action android:name="android.intent.action.THIRD" />
             </intent-filter>
         </activity>
+        <provider android:name=".provides.JmmyProvider"
+            android:authorities="com.jmmy.jmmyapp">
+
+        </provider>
         <service android:name=".services.JmmyServices">
             <intent-filter>
                 <action android:name="android.intent.action.jmmyservice" />

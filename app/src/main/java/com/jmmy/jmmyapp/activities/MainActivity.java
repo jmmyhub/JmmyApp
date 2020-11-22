@@ -3,6 +3,7 @@ package com.jmmy.jmmyapp.activities;
 import android.Manifest;
 import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.database.ContentObserver;
@@ -31,6 +32,7 @@ import com.jmmy.jmmyapp.fragments.FirstFragment;
 import com.jmmy.jmmyapp.fragments.FourthFragment;
 import com.jmmy.jmmyapp.fragments.SecondFragment;
 import com.jmmy.jmmyapp.fragments.ThirdFragment;
+import com.jmmy.jmmyapp.provides.ContactMetaData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -102,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initContentResolver() {
         mContentResolver = getApplicationContext().getContentResolver();
         mContentResolver.registerContentObserver(Settings.Global.getUriFor(Settings.Global.DEVELOPMENT_SETTINGS_ENABLED),
-            false, mSettingObserver);
+                false, mSettingObserver);
     }
 
     private void initBroadCastReciver() {
@@ -139,11 +141,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String[] permissList = {Manifest.permission.READ_CONTACTS, Manifest.permission.READ_PHONE_STATE};
                 checkContactPermission(MainActivity.this, permissList, 200);
                 ArrayList<MyContacts> list = showContacts();
+                ContentResolver cr = getContentResolver();
+                for (int i = 0; i < list.size(); i++) {
+                    ContentValues values = new ContentValues();
+                    values.put(ContactMetaData.MyTableData.COLUMN_NAME, list.get(i).name);
+                    values.put(ContactMetaData.MyTableData.COLUMN_PHONE_NUMBER, list.get(i).phone);
+                    LogUtils.i(TAG, "list.get(i).name = " + list.get(i).name);
+                    LogUtils.i(TAG, "list.get(i).phone = " + list.get(i).phone);
+                    cr.insert(ContactMetaData.MyTableData.CONTENT_URI, values);
+                }
                 //Bundle bundle = new Bundle();
                 //bundle.putParcelableArrayList("contact",list);
                 //mFirstFragment.setArguments(bundle);
                 mListener.onFragmentInteraction(list);
-                Toast.makeText(this, "first fragment",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "first fragment", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.button2:
                 if (mSecondFragment == null) {
@@ -152,7 +163,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 } else {
                     fragmentTransaction.show(mSecondFragment);
                 }
-                Toast.makeText(this, "second fragment",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "second fragment", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.button3:
                 if (mThirdFragment == null) {
@@ -161,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 } else {
                     fragmentTransaction.show(mThirdFragment);
                 }
-                Toast.makeText(this, "third fragment",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "third fragment", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.button4:
                 if (mFourthFragment == null) {
@@ -170,17 +181,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 } else {
                     fragmentTransaction.show(mFourthFragment);
                 }
-                Toast.makeText(this, "fourth fragment",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "fourth fragment", Toast.LENGTH_SHORT).show();
                 break;
         }
         fragmentTransaction.commit();
 
     }
 
-    private class MyAidlLisenter extends IMyAidlInterface.Stub{
+    private class MyAidlLisenter extends IMyAidlInterface.Stub {
         @Override
         public void basicTypes(int anInt, long aLong, boolean aBoolean, float aFloat,
-            double aDouble, String aString) throws RemoteException {
+                               double aDouble, String aString) throws RemoteException {
 
         }
     }
