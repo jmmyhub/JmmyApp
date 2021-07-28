@@ -17,7 +17,8 @@ import com.jmmy.jmmyapp.adaptercontent.RecyclerViewAdapter;
 
 import java.util.ArrayList;
 
-public class FirstFragment extends BaseFragment implements MainActivity.OnFragmentInteractionListener {
+public class FirstFragment extends BaseFragment implements
+        MainActivity.OnFragmentInteractionListener {
     private Context mContext;
     private RecyclerViewAdapter mAdapter;
     private RecyclerView mRecView;
