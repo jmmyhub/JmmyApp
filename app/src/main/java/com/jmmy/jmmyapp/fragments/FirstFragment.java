@@ -52,6 +52,7 @@ public class FirstFragment extends BaseFragment implements
 
     }
 
+
     @Override
     public void onFragmentInteraction(ArrayList<MyContacts> list) {
         mAdapter.setData(list);
