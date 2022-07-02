@@ -1,4 +1,4 @@
-package com.jmmy.jmmyapp.jmmyview;
+package com.jmmy.jmmyapp.views;
 
 import android.content.Context;
 import android.graphics.Canvas;
