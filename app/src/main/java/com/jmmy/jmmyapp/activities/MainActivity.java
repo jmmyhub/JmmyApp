@@ -10,10 +10,8 @@ import android.database.ContentObserver;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.RemoteException;
 import android.provider.Settings;
 import android.view.View;
-import android.view.WindowInsets;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,7 +21,6 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.jmmy.jmmyapp.IMyAidlInterface;
 import com.jmmy.jmmyapp.Utils.ContactsUtils;
 import com.jmmy.jmmyapp.Utils.LogUtils;
 import com.jmmy.jmmyapp.R;
@@ -36,7 +33,6 @@ import com.jmmy.jmmyapp.fragments.ThirdFragment;
 import com.jmmy.jmmyapp.provides.ContactMetaData;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "MainActivity";
@@ -186,15 +182,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
         fragmentTransaction.commit();
-
-    }
-
-    private class MyAidlLisenter extends IMyAidlInterface.Stub {
-        @Override
-        public void basicTypes(int anInt, long aLong, boolean aBoolean, float aFloat,
-                               double aDouble, String aString) throws RemoteException {
-
-        }
     }
 
     @Override

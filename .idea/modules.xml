@@ -7,6 +7,10 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/JmmyApp.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/JmmyApp.app.androidTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/JmmyApp.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/JmmyApp.app.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/JmmyApp.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/JmmyApp.app.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/jmmysdk/JmmyApp.jmmysdk.iml" filepath="$PROJECT_DIR$/.idea/modules/jmmysdk/JmmyApp.jmmysdk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/jmmysdk/JmmyApp.jmmysdk.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/jmmysdk/JmmyApp.jmmysdk.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/jmmysdk/JmmyApp.jmmysdk.main.iml" filepath="$PROJECT_DIR$/.idea/modules/jmmysdk/JmmyApp.jmmysdk.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/jmmysdk/JmmyApp.jmmysdk.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/jmmysdk/JmmyApp.jmmysdk.unitTest.iml" />
     </modules>
   </component>
 </project>
