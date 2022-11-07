@@ -2,16 +2,26 @@ package com.jmmy.jmmyapp.activities;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ActivityOptions;
+import android.app.Instrumentation;
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.database.ContentObserver;
+import android.hardware.display.DisplayManager;
+import android.hardware.input.InputManager;
+import android.nfc.Tag;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
+import android.view.Display;
+import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,10 +31,10 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.jmmy.jmmyapp.Utils.ContactsUtils;
-import com.jmmy.jmmyapp.Utils.LogUtils;
+import com.jmmy.jmmyapp.utils.ContactsUtils;
 import com.jmmy.jmmyapp.R;
-import com.jmmy.jmmyapp.Utils.MyContacts;
+import com.jmmy.jmmyapp.utils.LogUtils;
+import com.jmmy.jmmyapp.utils.MyContacts;
 import com.jmmy.jmmyapp.broadcastreceviver.JmmyBroadcastReceiver;
 import com.jmmy.jmmyapp.fragments.FirstFragment;
 import com.jmmy.jmmyapp.fragments.FourthFragment;
@@ -194,6 +204,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onResume() {
         LogUtils.i(TAG, "MainActivity  onResume");
         super.onResume();
+        DisplayManager displayManager = (DisplayManager) getSystemService(DISPLAY_SERVICE);
+        Display[] displays = displayManager.getDisplays();
+        for (int i = 0; i < displays.length; i++) {
+            Display display = displays[i];
+            LogUtils.i(TAG, "onResume display:" + display);
+            if (display.getDisplayId() != Display.DEFAULT_DISPLAY) {
+                Context context = createDisplayContext(display);
+                Intent intent = new Intent();
+                ActivityOptions activityOptions = ActivityOptions.makeBasic();
+                activityOptions.setLaunchDisplayId(display.getDisplayId());
+                intent.setClass(context, ThirdActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent, activityOptions.toBundle());
+                WindowManager windowManager = (WindowManager) context.getSystemService(WINDOW_SERVICE);
+                WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+                layoutParams.width = 144;
+                layoutParams.gravity = Gravity.START;
+                layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT;
+                layoutParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+                View view = View.inflate(context, R.layout.navi_status_bar, null);
+                windowManager.addView(view, layoutParams);
+                InputManager inputManager = (InputManager) context.getSystemService(INPUT_SERVICE);
+//                Instrumentation instrumentation = new Instrumentation();
+//                instrumentation.sendPointerSync();
+
+            }
+        }
     }
 
     private void checkContactPermission(Activity activity, String[] permissions, int request) {
@@ -210,7 +247,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(this, "已授权", Toast.LENGTH_SHORT).show();
             } else {
                 //请求权限方法
-                String[] permissionsNew = mPermissionList.toArray(new String[mPermissionList.size()]);//将List转为数组
+                String[] permissionsNew = mPermissionList.toArray(new String[0]);//将List转为数组
                 ActivityCompat.requestPermissions(this, permissionsNew, request);
                 //这个触发下面onRequestPermissionsResult这个回调
             }

@@ -3,10 +3,9 @@ package com.jmmy.jmmyapp.services;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
-import android.util.Log;
 
-import com.jmmy.jmmyapp.Utils.LogUtils;
-import com.jmmy.jmmyapp.Utils.MyInterfaceImpl;
+import com.jmmy.jmmyapp.utils.LogUtils;
+import com.jmmy.jmmyapp.utils.MyInterfaceImpl;
 
 /**
  * Created by jmmy on 2017/12/15.

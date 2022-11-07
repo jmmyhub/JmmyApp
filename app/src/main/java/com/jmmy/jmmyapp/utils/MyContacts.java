@@ -1,4 +1,4 @@
-package com.jmmy.jmmyapp.Utils;
+package com.jmmy.jmmyapp.utils;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -32,10 +32,10 @@ public class MyContacts implements Parcelable {
     @Override
     public String toString() {
         return "MyContacts{" +
-                "name='" + name + '\'' +
-                ", phone='" + phone + '\'' +
-                ", note='" + note + '\'' +
-                '}';
+            "name='" + name + '\'' +
+            ", phone='" + phone + '\'' +
+            ", note='" + note + '\'' +
+            '}';
     }
 
     public String getName() {

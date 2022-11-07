@@ -6,8 +6,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
@@ -20,8 +18,8 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 
 import com.jmmy.jmmyapp.R;
-import com.jmmy.jmmyapp.Utils.LogUtils;
 import com.jmmy.jmmyapp.services.JmmyServiceConnection;
+import com.jmmy.jmmyapp.utils.LogUtils;
 
 public class SecondFragment extends BaseFragment {
     private static final String TAG = "SecondFragment";
@@ -44,9 +42,11 @@ public class SecondFragment extends BaseFragment {
         Button button5 = view.findViewById(R.id.button5);
         button5.setOnClickListener(button_view -> {
             LogUtils.i(TAG, "onCreateView button5 onClick ");
+
             Intent intent = new Intent();
-            intent.setClassName(mContext.getPackageName(), "com.jmmy.jmmyapp.services.JmmyServices");
+            intent.setClassName("com.jmmy.jmmy2", "com.jmmy.jmmy2.service.Jmmy2Service");
             mContext.bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
+
             Notification.Builder builder = new Notification.Builder(mContext, "jmmy_notification");
             Intent intent1 = new Intent();
             intent1.setClassName(mContext.getPackageName(), "com.jmmy.jmmyapp.activities.NextActivity");
@@ -67,7 +67,8 @@ public class SecondFragment extends BaseFragment {
             LogUtils.i(TAG, "onCreateView button6 onClick mServiceConnection:" + mServiceConnection);
             try {
                 if (mServiceConnection != null) {
-                    mServiceConnection.getAidlInterface().setCount(10);
+                    int value = mServiceConnection.getAidlInterface().getCount();
+                    LogUtils.i(TAG, "onCreateView button6 onClick value:" + value);
                 }
             } catch (RemoteException e) {
                 e.printStackTrace();

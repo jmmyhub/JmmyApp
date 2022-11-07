@@ -1,33 +1,36 @@
-package com.jmmy.jmmyapp;
+package com.jmmy.jmmysdk;
 
 import android.app.Service;
-import android.content.ComponentName;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.os.RemoteException;
 
-public class AbJmmyAidlService extends Service {
-    public AbJmmyAidlService() {
+public abstract class AbsJmmyAidlService extends Service {
+    private static final String TAG = "AbJmmyAidlService";
+    public AbsJmmyAidlService() {
     }
 
     @Override
     public IBinder onBind(Intent intent) {
         // TODO: Return the communication channel to the service.
-        return new IJmmyAidlInterface();
-
+        MyBinder iBinder = new MyBinder();
+        return iBinder;
     }
 
-    private class IJmmyAidlInterface extends IMyAidlInterface.Stub{
+    public abstract void setCountValue(int value);
+
+    public abstract int getCountValue();
+
+    private class MyBinder extends IJmmyAidlInterface.Stub{
 
         @Override
         public void setCount(int value) throws RemoteException {
-
+            setCountValue(value);
         }
 
         @Override
-        public void getCount() throws RemoteException {
-
+        public int getCount() throws RemoteException {
+            return getCountValue();
         }
 
         @Override

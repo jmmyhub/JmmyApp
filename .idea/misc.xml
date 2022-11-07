@@ -3,7 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/car_icon.xml" value="0.107" />
+        <entry key="app/src/main/res/drawable/icon_car.xml" value="0.107" />
+        <entry key="app/src/main/res/drawable/icon_find.xml" value="0.107" />
+        <entry key="app/src/main/res/drawable/icon_license.xml" value="0.107" />
+        <entry key="app/src/main/res/drawable/icon_mine.xml" value="0.107" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2318840579710145" />
+        <entry key="app/src/main/res/layout/activity_third.xml" value="0.11144883485309018" />
+        <entry key="app/src/main/res/layout/jmmyview.xml" value="0.18659420289855072" />
+        <entry key="app/src/main/res/layout/navi_statubar_bar.xml" value="0.2664233576642336" />
+        <entry key="app/src/main/res/layout/navi_status.xml" value="0.18659420289855072" />
+        <entry key="app/src/main/res/layout/navi_status_bar.xml" value="0.1" />
         <entry key="app/src/main/res/layout/second_fragment.xml" value="0.228125" />
         <entry key="app/src/main/res/layout/second_fragment_layout.xml" value="0.18659420289855072" />
       </map>
@@ -55,7 +65,7 @@
       </value>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_16" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

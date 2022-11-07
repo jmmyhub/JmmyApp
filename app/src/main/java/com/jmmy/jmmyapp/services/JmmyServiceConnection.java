@@ -5,12 +5,12 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.os.RemoteException;
 
-import com.jmmy.jmmyapp.IMyAidlInterface;
-import com.jmmy.jmmyapp.Utils.LogUtils;
+import com.jmmy.jmmyapp.utils.LogUtils;
+import com.jmmy.jmmysdk.IJmmyAidlInterface;
 
 public class JmmyServiceConnection implements ServiceConnection {
     private static final String TAG = "JmmyServiceConnection";
-    private IMyAidlInterface aidlInterface;
+    private IJmmyAidlInterface aidlInterface;
     private static JmmyServiceConnection instance;
     private static final Object LOCK_INSTANCE = new Object();
 
@@ -23,14 +23,19 @@ public class JmmyServiceConnection implements ServiceConnection {
         }
     }
 
-    public IMyAidlInterface getAidlInterface() {
+    public IJmmyAidlInterface getAidlInterface() {
         return aidlInterface;
     }
 
     @Override
     public void onServiceConnected(ComponentName name, IBinder service) {
         LogUtils.i(TAG, "onServiceConnected name:" + name);
-        aidlInterface = IMyAidlInterface.Stub.asInterface(service);
+        aidlInterface = IJmmyAidlInterface.Stub.asInterface(service);
+        try {
+            aidlInterface.setCount(10);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

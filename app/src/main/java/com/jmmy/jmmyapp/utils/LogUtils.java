@@ -1,4 +1,4 @@
-package com.jmmy.jmmyapp.Utils;
+package com.jmmy.jmmyapp.utils;
 
 import android.util.Log;
 
@@ -16,7 +16,8 @@ public class LogUtils {
     }
     public static void w(String tag,String message){
         Log.w(TAG+"#"+tag,message);
-    }public static void e(String tag,String message){
+    }
+    public static void e(String tag,String message){
         Log.e(TAG+"#"+tag,message);
     }
 

@@ -1,4 +1,4 @@
-package com.jmmy.jmmyapp.Utils;
+package com.jmmy.jmmyapp.utils;
 
 import android.content.Context;
 import android.database.Cursor;

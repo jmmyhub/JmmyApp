@@ -1,4 +1,4 @@
-package com.jmmy.jmmyapp.Utils;
+package com.jmmy.jmmyapp.utils;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -31,11 +31,9 @@ public class JmmyUtils {
               bufferedWriter.write(outgoingMsg);
               bufferedWriter.flush();
               socket.close();
-          }catch (InterruptedIOException e){
+          } catch (IOException e){
               e.printStackTrace();
-          } catch (IOException e) {
-              e.printStackTrace();
-          }finally {
+          } finally {
               if (serverSocket != null){
                   try {
                       serverSocket.close();

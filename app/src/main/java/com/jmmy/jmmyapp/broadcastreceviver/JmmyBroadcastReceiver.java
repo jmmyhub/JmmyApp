@@ -3,11 +3,8 @@ package com.jmmy.jmmyapp.broadcastreceviver;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-
-import com.jmmy.jmmyapp.Utils.LogUtils;
+import com.jmmy.jmmyapp.utils.LogUtils;
 
 /**
  * Created by jmmy on 2017/12/15.

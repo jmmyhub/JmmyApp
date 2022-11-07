@@ -1,10 +1,10 @@
-package com.jmmy.jmmyapp.Utils;
+package com.jmmy.jmmyapp.utils;
 
 import android.os.RemoteException;
 
-import com.jmmy.jmmyapp.IMyAidlInterface;
+import com.jmmy.jmmysdk.IJmmyAidlInterface;
 
-public class MyInterfaceImpl extends IMyAidlInterface.Stub {
+public class MyInterfaceImpl extends IJmmyAidlInterface.Stub {
     private static final String TAG = "MyInterfaceImpl";
     @Override
     public void setCount(int value) throws RemoteException {
@@ -12,8 +12,8 @@ public class MyInterfaceImpl extends IMyAidlInterface.Stub {
     }
 
     @Override
-    public void getCount() throws RemoteException {
-
+    public int getCount() throws RemoteException {
+        return 10;
     }
 
     @Override

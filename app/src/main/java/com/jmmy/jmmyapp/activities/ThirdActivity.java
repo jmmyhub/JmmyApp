@@ -3,18 +3,19 @@ package com.jmmy.jmmyapp.activities;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.MotionEvent;
-import android.widget.GridView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.jmmy.jmmyapp.Utils.LogUtils;
-import com.jmmy.jmmyapp.adaptercontent.GridViewAdapter;
 import com.jmmy.jmmyapp.R;
+import com.jmmy.jmmyapp.adaptercontent.RecyclerViewAdapter;
+import com.jmmy.jmmyapp.floatwindow.FloatWindowManager;
+import com.jmmy.jmmyapp.utils.LogUtils;
+import com.jmmy.jmmyapp.utils.MyContacts;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by jmmy on 2017/12/13.
@@ -23,24 +24,28 @@ import java.util.Map;
 public class ThirdActivity extends AppCompatActivity {
     private Context mContext = this;
     private String TAG = "ThirdActivity";
-    private GridView gridView ;
-    private GridViewAdapter gridViewAdapter;
+    private RecyclerView mRecycleView;
+    private RecyclerViewAdapter mAdapter;
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         LogUtils.i(TAG,"onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_third);
-        gridView = findViewById(R.id.gridview_third);
-        List<Map<String,Object>> list= new ArrayList<Map<String,Object>>();
-        for (int i = 0; i < 14 ; i++) {
-            Map<String,Object> map = new HashMap<>();
-            map.put("username","mayan"+i);
-            map.put("imgId",R.mipmap.ic_launcher);
-            list.add(map);
+        mRecycleView = findViewById(R.id.contacts);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
+        layoutManager.setOrientation(RecyclerView.VERTICAL);
+        mRecycleView.setLayoutManager(layoutManager);
+        mAdapter = new RecyclerViewAdapter(mContext, false);
+        List<MyContacts> list = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            MyContacts myContacts = new MyContacts();
+            myContacts.setName("张三" + i);
+            myContacts.setPhone("8901249234" + i);
+            list.add(myContacts);
         }
-        gridViewAdapter = new GridViewAdapter(mContext,list);
-        gridView.setAdapter(gridViewAdapter);
+        mAdapter.setData(list);
+        mRecycleView.setAdapter(mAdapter);
     }
 
     @Override
@@ -53,6 +58,7 @@ public class ThirdActivity extends AppCompatActivity {
     protected void onResume() {
         LogUtils.i(TAG,"onResume");
         super.onResume();
+        FloatWindowManager.getInstance(this).showMaskView();
     }
 
     @Override
@@ -62,8 +68,6 @@ public class ThirdActivity extends AppCompatActivity {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        int i = gridView.pointToPosition((int)event.getX(),(int)event.getY());
-        LogUtils.i(TAG,"i: " + i);
         return super.onTouchEvent(event);
     }
 
@@ -83,5 +87,6 @@ public class ThirdActivity extends AppCompatActivity {
     protected void onDestroy() {
         LogUtils.i(TAG,"onDestory");
         super.onDestroy();
+        FloatWindowManager.getInstance(this).dismissMaskView();
     }
 }
