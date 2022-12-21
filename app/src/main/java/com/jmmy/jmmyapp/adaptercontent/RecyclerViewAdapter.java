@@ -18,7 +18,7 @@ import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter {
     private static final String TAG = "RecyclerViewAdapter";
-    private List<MyContacts> mList = new ArrayList<>();
+    private List<MyContacts> mContactsDataList = new ArrayList<>();
     private Context mContext;
     private boolean isSpecialType;
 
@@ -33,63 +33,61 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
         View view;
         if (isSpecialType) {
             view = LayoutInflater.from(mContext).inflate(R.layout.item_recycleview_contact, parent, false);
-            return new CommonViewHolder(view);
+            return new SpecialViewHolder(view);
         } else {
             view = LayoutInflater.from(mContext).inflate(R.layout.item_recycleview_contact, parent, false);
-            return new SpecialViewHolder(view);
+            return new CommonViewHolder(view);
         }
-
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof CommonViewHolder) {
-            LogUtils.i(TAG, "onBindViewHolder = " + mList.get(position).name);
-            ((CommonViewHolder) holder).name.setText(mList.get(position).name);
-            ((CommonViewHolder) holder).number.setText(mList.get(position).phone);
+            LogUtils.i(TAG, "CommonViewHolder onBindViewHolder = " + mContactsDataList.get(position).name);
+            ((CommonViewHolder) holder).name.setText(mContactsDataList.get(position).name);
+            ((CommonViewHolder) holder).number.setText(mContactsDataList.get(position).phone);
         } else if (holder instanceof SpecialViewHolder) {
-            ((SpecialViewHolder) holder).name.setText(mList.get(position).name);
-            ((SpecialViewHolder) holder).number.setText(mList.get(position).phone);
+            LogUtils.i(TAG, "SpecialViewHolder onBindViewHolder = " + mContactsDataList.get(position).name);
+            ((SpecialViewHolder) holder).name.setText(mContactsDataList.get(position).name);
+            ((SpecialViewHolder) holder).number.setText(mContactsDataList.get(position).phone);
+        } else {
+            LogUtils.i(TAG, "onBindViewHolder else branch.");
         }
     }
 
     @Override
     public int getItemCount() {
-        return mList == null ? 0 : mList.size();
+        return mContactsDataList == null ? 0 : mContactsDataList.size();
     }
 
     public void setData(List<MyContacts> list) {
-        if (mList.isEmpty()) {
-            mList.addAll(list);
-        } else {
-            mList.clear();
-            mList.addAll(list);
+        if (list != null && !list.isEmpty()) {
+            mContactsDataList.clear();
+            mContactsDataList.addAll(list);
         }
         notifyDataSetChanged();
     }
 
 
     static class CommonViewHolder extends RecyclerView.ViewHolder{
-
         public TextView name;
         public TextView number;
-
         public CommonViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.text_name);
             number = itemView.findViewById(R.id.text_number);
+            itemView.setOnClickListener(view -> LogUtils.i(TAG, "CommonViewHolder view"));
         }
     }
 
     static class SpecialViewHolder extends RecyclerView.ViewHolder{
-
         public TextView name;
         public TextView number;
-
         public SpecialViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.text_name);
             number = itemView.findViewById(R.id.text_number);
+            itemView.setOnClickListener(view -> LogUtils.i(TAG, "SpecialViewHolder view"));
         }
     }
 }

@@ -1,32 +1,36 @@
 package com.jmmy.jmmyapp.services;
 
-import android.app.Service;
-import android.content.Intent;
-import android.os.IBinder;
+import android.media.browse.MediaBrowser;
+import android.os.Bundle;
+import android.service.media.MediaBrowserService;
 
-import com.jmmy.jmmyapp.utils.LogUtils;
-import com.jmmy.jmmyapp.utils.MyInterfaceImpl;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import java.util.List;
 
 /**
  * Created by jmmy on 2017/12/15.
  */
 
-public class JmmyServices extends Service {
+public class JmmyServices extends MediaBrowserService {
     private static final String TAG = "JmmyServices";
+    private static final String ROOT_ID = "__ROOT__";
+    @Nullable
     @Override
-    public void onCreate() {
-        LogUtils.i(TAG, "onCreate");
-        super.onCreate();
+    public BrowserRoot onGetRoot(@NonNull String clientPackageName, int clientUid, @Nullable Bundle rootHints) {
+        return new BrowserRoot(ROOT_ID, null);
     }
 
     @Override
-    public IBinder onBind(Intent intent) {
-        LogUtils.i(TAG, "onBind intent:" + intent);
-        return new MyInterfaceImpl();
-    }
-
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        return super.onStartCommand(intent, flags, startId);
+    public void onLoadChildren(@NonNull String parentId, @NonNull Result<List<MediaBrowser.MediaItem>> result) {
+        switch (parentId) {
+            case ROOT_ID:
+                result.detach();
+                result.sendResult(null);
+                break;
+            default:
+                break;
+        }
     }
 }

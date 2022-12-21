@@ -3,18 +3,13 @@ package com.jmmy.jmmyapp.activities;
 import android.Manifest;
 import android.app.Activity;
 import android.app.ActivityOptions;
-import android.app.Instrumentation;
 import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.database.ContentObserver;
 import android.hardware.display.DisplayManager;
-import android.hardware.input.InputManager;
-import android.nfc.Tag;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
@@ -26,7 +21,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -40,7 +34,6 @@ import com.jmmy.jmmyapp.fragments.FirstFragment;
 import com.jmmy.jmmyapp.fragments.FourthFragment;
 import com.jmmy.jmmyapp.fragments.SecondFragment;
 import com.jmmy.jmmyapp.fragments.ThirdFragment;
-import com.jmmy.jmmyapp.provides.ContactMetaData;
 
 import java.util.ArrayList;
 
@@ -82,36 +75,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initView() {
-        findViewById(R.id.button1).setOnClickListener(this);
-        findViewById(R.id.button2).setOnClickListener(this);
-        findViewById(R.id.button3).setOnClickListener(this);
-        findViewById(R.id.button4).setOnClickListener(this);
+        findViewById(R.id.button_first).setOnClickListener(this);
+        findViewById(R.id.button_second).setOnClickListener(this);
+        findViewById(R.id.button_third).setOnClickListener(this);
+        findViewById(R.id.button_fourth).setOnClickListener(this);
     }
 
     private void initFragmentTransaction() {
         mSupportFragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = mSupportFragmentManager.beginTransaction();
         //默认显示第一条
-        if (mFirstFragment != null) {
-            fragmentTransaction.hide(mFirstFragment);
-        }
         if (mFirstFragment == null) {
             mFirstFragment = new FirstFragment();
             fragmentTransaction.add(R.id.fragment_content, mFirstFragment);
         } else {
             fragmentTransaction.show(mFirstFragment);
         }
-        if (mFirstFragment instanceof OnFragmentInteractionListener) {
-            mListener = mFirstFragment;
-        }
+        ArrayList<MyContacts> list = getContactsList();
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList("contact",list);
+        mFirstFragment.setArguments(bundle);
+        LogUtils.i(TAG, "button_first list size : " + (list != null ? list.size() : "null"));
         fragmentTransaction.commit();
-
     }
 
     private void initContentResolver() {
         mContentResolver = getApplicationContext().getContentResolver();
         mContentResolver.registerContentObserver(Settings.Global.getUriFor(Settings.Global.DEVELOPMENT_SETTINGS_ENABLED),
-                false, mSettingObserver);
+        false, mSettingObserver);
     }
 
     private void initBroadCastReciver() {
@@ -138,32 +129,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             fragmentTransaction.hide(mFourthFragment);
         }
         switch (view.getId()) {
-            case R.id.button1:
+            case R.id.button_first:
                 if (mFirstFragment == null) {
                     mFirstFragment = new FirstFragment();
                     fragmentTransaction.add(R.id.fragment_content, mFirstFragment);
                 } else {
                     fragmentTransaction.show(mFirstFragment);
                 }
-                String[] permissList = {Manifest.permission.READ_CONTACTS, Manifest.permission.READ_PHONE_STATE};
-                checkContactPermission(MainActivity.this, permissList, 200);
-                ArrayList<MyContacts> list = showContacts();
-                ContentResolver cr = getContentResolver();
-                for (int i = 0; i < list.size(); i++) {
-                    ContentValues values = new ContentValues();
-                    values.put(ContactMetaData.MyTableData.COLUMN_NAME, list.get(i).name);
-                    values.put(ContactMetaData.MyTableData.COLUMN_PHONE_NUMBER, list.get(i).phone);
-                    LogUtils.i(TAG, "list.get(i).name = " + list.get(i).name);
-                    LogUtils.i(TAG, "list.get(i).phone = " + list.get(i).phone);
-                    cr.insert(ContactMetaData.MyTableData.CONTENT_URI, values);
-                }
-                //Bundle bundle = new Bundle();
-                //bundle.putParcelableArrayList("contact",list);
-                //mFirstFragment.setArguments(bundle);
-                mListener.onFragmentInteraction(list);
                 Toast.makeText(this, "first fragment", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.button2:
+            case R.id.button_second:
                 if (mSecondFragment == null) {
                     mSecondFragment = new SecondFragment();
                     fragmentTransaction.add(R.id.fragment_content, mSecondFragment);
@@ -172,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 Toast.makeText(this, "second fragment", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.button3:
+            case R.id.button_third:
                 if (mThirdFragment == null) {
                     mThirdFragment = new ThirdFragment();
                     fragmentTransaction.add(R.id.fragment_content, mThirdFragment);
@@ -181,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 Toast.makeText(this, "third fragment", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.button4:
+            case R.id.button_fourth:
                 if (mFourthFragment == null) {
                     mFourthFragment = new FourthFragment();
                     fragmentTransaction.add(R.id.fragment_content, mFourthFragment);
@@ -192,12 +167,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
         fragmentTransaction.commit();
-    }
-
-    @Override
-    protected void onStart() {
-        LogUtils.i(TAG, "MainActivity  onStart");
-        super.onStart();
     }
 
     @Override
@@ -225,42 +194,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 layoutParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
                 View view = View.inflate(context, R.layout.navi_status_bar, null);
                 windowManager.addView(view, layoutParams);
-                InputManager inputManager = (InputManager) context.getSystemService(INPUT_SERVICE);
-//                Instrumentation instrumentation = new Instrumentation();
-//                instrumentation.sendPointerSync();
-
             }
         }
     }
 
-    private void checkContactPermission(Activity activity, String[] permissions, int request) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {   //Android 6.0开始的动态权限，这里进行版本判断
-            ArrayList<String> mPermissionList = new ArrayList<>();
-            for (int i = 0; i < permissions.length; i++) {
-                if (ContextCompat.checkSelfPermission(activity, permissions[i])
-                        != PackageManager.PERMISSION_GRANTED) {
-                    mPermissionList.add(permissions[i]);
-                }
+    private ArrayList<MyContacts> checkContactPermission(Activity activity, String[] permissions, int request) {
+        //Android 6.0开始的动态权限，这里进行版本判断
+        ArrayList<String> permissionsTemp = new ArrayList<>();
+        for (int i = 0; i < permissions.length; i++) {
+            if (ContextCompat.checkSelfPermission(activity, permissions[i])
+                    != PackageManager.PERMISSION_GRANTED) {
+                permissionsTemp.add(permissions[i]);
             }
-            if (mPermissionList.isEmpty()) {  //非初次进入App且已授权
-                showContacts();
-                Toast.makeText(this, "已授权", Toast.LENGTH_SHORT).show();
-            } else {
-                //请求权限方法
-                String[] permissionsNew = mPermissionList.toArray(new String[0]);//将List转为数组
-                ActivityCompat.requestPermissions(this, permissionsNew, request);
-                //这个触发下面onRequestPermissionsResult这个回调
-            }
+        }
+        if (permissionsTemp.isEmpty()) {  //非初次进入App且已授权
+            Toast.makeText(this, "已授权", Toast.LENGTH_SHORT).show();
+            return ContactsUtils.getAllContacts(this);
         } else {
-            showContacts();
+            Toast.makeText(this, "未授权", Toast.LENGTH_SHORT).show();
+            //请求权限方法
+            String[] permissionsNew = permissionsTemp.toArray(new String[0]);//将List转为数组
+            requestPermissions(permissionsNew, request);
+            //这个触发下面onRequestPermissionsResult这个回调
         }
+        return ContactsUtils.getAllContacts(this);
     }
 
-    private ArrayList<MyContacts> showContacts() {
-        ArrayList<MyContacts> contactsList = ContactsUtils.getAllContacts(this);
-        for (int i = 0; i < contactsList.size(); i++) {
-            LogUtils.i(TAG, "showContacts = " + contactsList.get(i).getName());
-        }
+    private ArrayList<MyContacts> getContactsList() {
+        String[] permissions = {Manifest.permission.READ_CONTACTS};
+        ArrayList<MyContacts> contactsList = checkContactPermission(this, permissions, 200);
         return contactsList;
     }
 
@@ -277,32 +239,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
         if (hasAllGranted) { //同意权限做的处理,开启服务提交通讯录
-            showContacts();
             Toast.makeText(this, "同意授权", Toast.LENGTH_SHORT).show();
         } else {    //拒绝授权做的处理，弹出弹框提示用户授权
             //dealwithPermiss(MainActivity.this, permissions[0]);
-            showContacts();
             Toast.makeText(this, "不同意授权", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    private OnFragmentInteractionListener mListener;
-
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(ArrayList<MyContacts> list);
-    }
-
-
-    @Override
-    protected void onPause() {
-        LogUtils.i(TAG, "MainActivity  onPause");
-        super.onPause();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
     }
 
     @Override
@@ -315,7 +256,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     class SettingObserver extends ContentObserver {
-
         /**
          * Creates a content observer.
          *
@@ -328,7 +268,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public void onChange(boolean selfChange) {
             try {
-                Settings.Global.getInt(mContentResolver, Settings.Global.MODE_RINGER);
+                int value = Settings.Global.getInt(mContentResolver, Settings.Global.MODE_RINGER);
+                LogUtils.i(TAG, "onChange:" + value);
             } catch (Settings.SettingNotFoundException e) {
                 e.printStackTrace();
             }

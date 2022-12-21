@@ -47,7 +47,7 @@ public class FloatWindowManager {
         Display display = null;
         for (Display value : displays) {
             LogUtils.i(TAG, "getFloatWindowParmas:" + value);
-            if (value.getDisplayId() != Display.DEFAULT_DISPLAY) {
+            if (value.getDisplayId() != Display.DEFAULT_DISPLAY && display.isValid()) {
                 display = value;
                 break;
             }

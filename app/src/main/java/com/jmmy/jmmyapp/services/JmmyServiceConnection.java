@@ -10,7 +10,7 @@ import com.jmmy.jmmysdk.IJmmyAidlInterface;
 
 public class JmmyServiceConnection implements ServiceConnection {
     private static final String TAG = "JmmyServiceConnection";
-    private IJmmyAidlInterface aidlInterface;
+    private IJmmyAidlInterface iJmmyAidlInterface;
     private static JmmyServiceConnection instance;
     private static final Object LOCK_INSTANCE = new Object();
 
@@ -23,18 +23,20 @@ public class JmmyServiceConnection implements ServiceConnection {
         }
     }
 
-    public IJmmyAidlInterface getAidlInterface() {
-        return aidlInterface;
+    public IJmmyAidlInterface getJmmyAidlInterface() {
+        return iJmmyAidlInterface;
     }
 
     @Override
     public void onServiceConnected(ComponentName name, IBinder service) {
         LogUtils.i(TAG, "onServiceConnected name:" + name);
-        aidlInterface = IJmmyAidlInterface.Stub.asInterface(service);
-        try {
-            aidlInterface.setCount(10);
-        } catch (RemoteException e) {
-            e.printStackTrace();
+        iJmmyAidlInterface = IJmmyAidlInterface.Stub.asInterface(service);
+        if (iJmmyAidlInterface != null) {
+            try {
+                LogUtils.i(TAG, "onServiceConnected " + iJmmyAidlInterface.getCount());
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
         }
     }
 

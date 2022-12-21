@@ -12,20 +12,22 @@ public class ContactsUtils {
         ArrayList<MyContacts> contacts = new ArrayList<MyContacts>();
 
         Cursor cursor = context.getContentResolver().query(
-                ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
+            ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
         while (cursor.moveToNext()) {
             //新建一个联系人实例
             MyContacts temp = new MyContacts();
-            String contactId = cursor.getString(cursor
-                    .getColumnIndex(ContactsContract.Contacts._ID));
+            int value = cursor.getColumnIndex(ContactsContract.Contacts._ID);
+            if (value == -1) {
+                break;
+            }
+            String contactId = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
             //获取联系人姓名
-            String name = cursor.getString(cursor
-                    .getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+            String name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
             temp.name = name;
 
             //获取联系人电话号码
             Cursor phoneCursor = context.getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                    null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=" + contactId, null, null);
+        null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=" + contactId, null, null);
             while (phoneCursor.moveToNext()) {
                 String phone = phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
                 phone = phone.replace("-", "");

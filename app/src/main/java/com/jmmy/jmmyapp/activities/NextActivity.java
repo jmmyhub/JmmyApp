@@ -107,7 +107,7 @@ public class NextActivity extends AppCompatActivity{
     };
 
     private MediaBrowser.ConnectionCallback connectionCallback
-            = new MediaBrowser.ConnectionCallback(){
+        = new MediaBrowser.ConnectionCallback(){
         @Override
         public void onConnected() {
             super.onConnected();
@@ -140,10 +140,9 @@ public class NextActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_next);
-        Log.i(TAG, "onCreate");
+        LogUtils.i(TAG, "onCreate");
         ComponentName componentName = new ComponentName(this, JmmyServices.class);
-        mMediaBrowser = new MediaBrowser(this,
-            componentName, connectionCallback, null);
+        mMediaBrowser = new MediaBrowser(this, componentName, connectionCallback, null);
         mMediaBrowser.connect();
     }
 

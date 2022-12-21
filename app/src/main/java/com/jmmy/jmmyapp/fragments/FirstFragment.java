@@ -11,22 +11,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.jmmy.jmmyapp.R;
+import com.jmmy.jmmyapp.utils.LogUtils;
 import com.jmmy.jmmyapp.utils.MyContacts;
-import com.jmmy.jmmyapp.activities.MainActivity;
 import com.jmmy.jmmyapp.adaptercontent.RecyclerViewAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class FirstFragment extends BaseFragment implements
-        MainActivity.OnFragmentInteractionListener {
+public class FirstFragment extends BaseFragment {
+    private static final String TAG = "FirstFragment";
     private Context mContext;
     private RecyclerViewAdapter mAdapter;
-    private RecyclerView mRecView;
+    private RecyclerView mRecycleView;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -36,33 +34,33 @@ public class FirstFragment extends BaseFragment implements
     }
 
     @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.first_fragment_layout,container,false);
-        mRecView = view.findViewById(R.id.recycler_view);
+        View view = inflater.inflate(R.layout.fragment_first_layout,container,false);
+        mRecycleView = view.findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
-        mRecView.setLayoutManager(layoutManager);
+        mRecycleView.setLayoutManager(layoutManager);
         mAdapter = new RecyclerViewAdapter(mContext, false);
-        List<MyContacts> list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            MyContacts myContacts = new MyContacts();
-            myContacts.setName("张三" + i);
-            myContacts.setPhone("8901249234" + i);
-            list.add(myContacts);
-        }
-        mAdapter.setData(list);
-        mRecView.setAdapter(mAdapter);
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-    }
-
-
-    @Override
-    public void onFragmentInteraction(ArrayList<MyContacts> list) {
-        mAdapter.setData(list);
+        Bundle bundle = getArguments();
+        LogUtils.i(TAG, "onResume bundle:" + (bundle != null ? bundle:  "null"));
+        if (bundle != null) {
+            ArrayList<MyContacts> list = bundle.getParcelableArrayList("contact");
+            LogUtils.i(TAG, "onResume list:" + (list != null ? list.size() :  "null"));
+            if (list != null && !list.isEmpty()) {
+                mAdapter.setData(list);
+                mRecycleView.setAdapter(mAdapter);
+            }
+        }
     }
 }

@@ -4,7 +4,7 @@ import android.os.RemoteException;
 
 import com.jmmy.jmmysdk.IJmmyAidlInterface;
 
-public class MyInterfaceImpl extends IJmmyAidlInterface.Stub {
+public class MyInterfaceImpl extends IJmmyAidlInterface.Stub{
     private static final String TAG = "MyInterfaceImpl";
     @Override
     public void setCount(int value) throws RemoteException {

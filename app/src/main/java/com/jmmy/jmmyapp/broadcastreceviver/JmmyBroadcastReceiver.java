@@ -24,8 +24,9 @@ public class JmmyBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         //LogUtils.i(TAG,"action : " + intent.getAction());
-        if (intent != null && intent.getAction() != null && intent.getAction().equals(IntentAction)){
-            LogUtils.i(TAG,"onReceive  weijianming ............");
+        if (intent != null && intent.getAction() != null
+            && intent.getAction().equals(IntentAction)){
+            LogUtils.i(TAG,"onReceive  jmmy ............");
         }
     }
 

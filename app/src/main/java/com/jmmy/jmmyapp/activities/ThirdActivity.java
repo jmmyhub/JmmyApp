@@ -49,38 +49,10 @@ public class ThirdActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
-        LogUtils.i(TAG,"onStart");
-        super.onStart();
-    }
-
-    @Override
     protected void onResume() {
         LogUtils.i(TAG,"onResume");
         super.onResume();
         FloatWindowManager.getInstance(this).showMaskView();
-    }
-
-    @Override
-    public boolean onGenericMotionEvent(MotionEvent event) {
-        return super.onGenericMotionEvent(event);
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        return super.onTouchEvent(event);
-    }
-
-    @Override
-    protected void onPause() {
-        LogUtils.i(TAG,"onPause");
-        super.onPause();
-    }
-
-    @Override
-    protected void onStop() {
-        LogUtils.i(TAG,"onStop");
-        super.onStop();
     }
 
     @Override
