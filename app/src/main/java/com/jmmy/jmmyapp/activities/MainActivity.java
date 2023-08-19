@@ -175,8 +175,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onResume();
         DisplayManager displayManager = (DisplayManager) getSystemService(DISPLAY_SERVICE);
         Display[] displays = displayManager.getDisplays();
-        for (int i = 0; i < displays.length; i++) {
-            Display display = displays[i];
+        for (Display display : displays) {
             LogUtils.i(TAG, "onResume display:" + display);
             if (display.getDisplayId() != Display.DEFAULT_DISPLAY) {
                 Context context = createDisplayContext(display);

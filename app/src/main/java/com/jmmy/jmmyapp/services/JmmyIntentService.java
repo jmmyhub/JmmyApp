@@ -3,7 +3,10 @@ package com.jmmy.jmmyapp.services;
 import android.app.IntentService;
 import android.content.Intent;
 
+import com.jmmy.jmmyapp.utils.LogUtils;
+
 public class JmmyIntentService extends IntentService {
+    private static String TAG = "JmmyIntentService";
 
     private boolean isRunning = false;
     private int count = 0;
@@ -51,9 +54,11 @@ public class JmmyIntentService extends IntentService {
 
     private void sendServiceStatus(String s) {
         Intent intent = new Intent("");
+        LogUtils.i(TAG,"sendServiceStatus s:" + s + ",intent:" + intent);
     }
 
-    private void sendThreadStatus(String 线程启动, int count) {
+    private void sendThreadStatus(String s, int count) {
+        LogUtils.i(TAG,"sendThreadStatus s:" + s + ",count:" + count);
     }
 
 }

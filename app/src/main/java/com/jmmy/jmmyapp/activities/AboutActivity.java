@@ -18,4 +18,14 @@ public class AboutActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }

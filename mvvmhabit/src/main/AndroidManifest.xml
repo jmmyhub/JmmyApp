@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.jmmy.mvvmhabit">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <application>
+        <activity
+            android:name=".base.ContainerActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name=".crash.DefaultErrorActivity"
+            android:process=":error_activity" />
+        <provider
+            android:name=".crash.CaocInitProvider"
+            android:authorities="${applicationId}.customactivityoncrashinitprovider"
+            android:exported="false"
+            android:initOrder="101" />
+    </application>
+</manifest>

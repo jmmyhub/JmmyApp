@@ -11,6 +11,10 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/jmmysdk/JmmyApp.jmmysdk.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/jmmysdk/JmmyApp.jmmysdk.androidTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/jmmysdk/JmmyApp.jmmysdk.main.iml" filepath="$PROJECT_DIR$/.idea/modules/jmmysdk/JmmyApp.jmmysdk.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/jmmysdk/JmmyApp.jmmysdk.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/jmmysdk/JmmyApp.jmmysdk.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mvvmhabit/JmmyApp.mvvmhabit.iml" filepath="$PROJECT_DIR$/.idea/modules/mvvmhabit/JmmyApp.mvvmhabit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mvvmhabit/JmmyApp.mvvmhabit.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/mvvmhabit/JmmyApp.mvvmhabit.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mvvmhabit/JmmyApp.mvvmhabit.main.iml" filepath="$PROJECT_DIR$/.idea/modules/mvvmhabit/JmmyApp.mvvmhabit.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mvvmhabit/JmmyApp.mvvmhabit.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/mvvmhabit/JmmyApp.mvvmhabit.unitTest.iml" />
     </modules>
   </component>
 </project>

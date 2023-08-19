@@ -29,7 +29,7 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="10f8052c-e4fa-4b50-85a9-406715d868ae">
-      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[select * from contact_info]]></console>
+      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[select * from jmmy_db]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
@@ -76,7 +76,7 @@
           <description value="" />
           <database-type value="SQLITE" />
           <config-type value="BASIC" />
-          <database-version value="3.21" />
+          <database-version value="3.39" />
           <driver-source value="BUILTIN" />
           <driver-library value="" />
           <driver value="" />

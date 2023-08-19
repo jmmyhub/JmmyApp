@@ -1,2 +1,2 @@
-include ':app'
-include ':jmmysdk'
+include ':app',':jmmysdk'
+include ':mvvmhabit'

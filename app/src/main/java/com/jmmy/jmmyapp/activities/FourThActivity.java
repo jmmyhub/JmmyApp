@@ -47,7 +47,7 @@ public class FourThActivity extends AppCompatActivity implements View.OnClickLis
         PagerSnapHelper pagerSnapHelper = new PagerSnapHelper() {
             @Override
             public int findTargetSnapPosition(RecyclerView.LayoutManager layoutManager, int velocityX, int velocityY) {
-                return super.findTargetSnapPosition(layoutManager, velocityX, velocityY);
+            return super.findTargetSnapPosition(layoutManager, velocityX, velocityY);
             }
         };
         pagerSnapHelper.attachToRecyclerView(mRecycleView);
@@ -56,7 +56,6 @@ public class FourThActivity extends AppCompatActivity implements View.OnClickLis
             pagerSnapHelper, new RecyclerViewPageChangeListenerHelper.OnPageChangeListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-
             }
 
             @Override
@@ -65,7 +64,6 @@ public class FourThActivity extends AppCompatActivity implements View.OnClickLis
 
             @Override
             public void onPageSelected(int position) {
-
             }
         }));
     }
