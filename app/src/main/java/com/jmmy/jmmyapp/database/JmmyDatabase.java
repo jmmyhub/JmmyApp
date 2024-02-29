@@ -6,7 +6,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {DataEntity.class}, version = 1)
+@Database(entities = {DataEntity.class}, version = 1,exportSchema = false)
 public abstract class JmmyDatabase extends RoomDatabase {
     private static final String DATABASE_NAME = "jmmy_db.db";
     private static JmmyDatabase databaseInstance;

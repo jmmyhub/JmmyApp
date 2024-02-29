@@ -1,7 +1,5 @@
 package com.jmmy.jmmyapp.ui.form;
 
-import static com.jmmy.mvvmhabit.utils.Utils.getContext;
-
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;

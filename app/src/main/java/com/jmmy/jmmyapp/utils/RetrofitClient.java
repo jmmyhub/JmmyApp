@@ -10,7 +10,7 @@ import com.jmmy.mvvmhabit.http.interceptor.BaseInterceptor;
 import com.jmmy.mvvmhabit.http.interceptor.CacheInterceptor;
 import com.jmmy.mvvmhabit.http.interceptor.logging.Level;
 import com.jmmy.mvvmhabit.http.interceptor.logging.LoggingInterceptor;
-import com.jmmy.mvvmhabit.utils.KLog;
+import com.jmmy.mvvmhabit.utils.LogUtil;
 import com.jmmy.mvvmhabit.utils.Utils;
 
 import java.io.File;
@@ -79,7 +79,7 @@ public class RetrofitClient {
                 cache = new Cache(httpCacheDirectory, CACHE_TIMEOUT);
             }
         } catch (Exception e) {
-            KLog.e("Could not create http cache", e);
+            LogUtil.e("Could not create http cache", e);
         }
         HttpsUtils.SSLParams sslParams = HttpsUtils.getSslSocketFactory();
         okHttpClient = new OkHttpClient.Builder()

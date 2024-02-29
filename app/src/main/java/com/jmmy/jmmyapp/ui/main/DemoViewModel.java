@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 
+import com.jmmy.jmmyapp.ble.BLEFragment;
 import com.jmmy.jmmyapp.entity.FormEntity;
 import com.jmmy.jmmyapp.ui.form.FormFragment;
 import com.jmmy.jmmyapp.ui.network.NetWorkFragment;
@@ -107,6 +108,12 @@ public class DemoViewModel extends BaseViewModel {
         @Override
         public void call() {
             loadUrlEvent.setValue("http://gdown.baidu.com/data/wisegame/dc8a46540c7960a2/baidushoujizhushou_16798087.apk");
+        }
+    });
+    public BindingCommand startThirdActivityClick = new BindingCommand(new BindingAction() {
+        @Override
+        public void call() {
+            startContainerActivity(BLEFragment.class.getCanonicalName());
         }
     });
 }

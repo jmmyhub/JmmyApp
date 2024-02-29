@@ -8,10 +8,7 @@ import androidx.annotation.NonNull;
 import com.jmmy.jmmyapp.ui.login.LoginActivity;
 import com.jmmy.mvvmhabit.base.BaseApplication;
 import com.jmmy.mvvmhabit.crash.CaocConfig;
-import com.jmmy.mvvmhabit.utils.KLog;
-
-import java.net.ServerSocket;
-import java.net.Socket;
+import com.jmmy.mvvmhabit.utils.LogUtil;
 
 public class JmmyApplication extends BaseApplication {
     private static final String TAG = "JmmyApplication";
@@ -19,7 +16,7 @@ public class JmmyApplication extends BaseApplication {
     public void onCreate() {
         super.onCreate();
         Log.i(TAG,"JmmyApplication onCreate");
-        KLog.init(true);
+        LogUtil.init(true);
         //初始化全局异常崩溃
         initCrash();
         //内存泄漏检测
